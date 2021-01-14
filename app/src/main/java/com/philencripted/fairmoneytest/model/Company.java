@@ -2,7 +2,9 @@ package com.philencripted.fairmoneytest.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Company {
+import java.io.Serializable;
+
+public class Company implements Serializable {
     @SerializedName("name")
     @Expose
     private String name;

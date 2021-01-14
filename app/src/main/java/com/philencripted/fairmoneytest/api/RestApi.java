@@ -13,7 +13,6 @@ public interface RestApi {
 /*
 This request is to fetch user details by passing app id in the header
 */
-   // @Headers("app-id: X7kIBrdcNLvSA5NZXEG3") //dummyapi.oi key
     @GET("/users")
     Call<List<User>> getAllDummyUsers();
 }

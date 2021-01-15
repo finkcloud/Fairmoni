@@ -21,7 +21,7 @@ import com.philencripted.fairmoneytest.viewmodel.UserViewModel;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    // declare viewmodel
+    // declare view model
     private UserViewModel userViewModel;
 
     private ProgressBar progressBar;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // hold ceontext reference for non activity use
+        // hold context reference for non activity class use
         Util.set_context(this);
 
         userRecyclerview = findViewById(R.id.user_recycler_view);
@@ -49,17 +49,19 @@ public class MainActivity extends AppCompatActivity {
         userliveData.observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
+                // show progress while loading data
                 progressBar.setVisibility(View.VISIBLE);
+
+                // setup user list
                 setUpUserList(users);
+
+                //hide progress after ui is populated
                 progressBar.setVisibility(View.GONE);
-                // debug purpose
-                for (int i = 0; i < users.size(); i++){
-                    System.out.println(users.get(i).getAddress().getStreet());
-                }
             }
         });
     }
 
+    // populated list with data from adapter
     private void setUpUserList(List<User> userList){
         userRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         userRecyclerview.setHasFixedSize(true);

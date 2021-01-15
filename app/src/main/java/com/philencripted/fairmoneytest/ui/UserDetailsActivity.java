@@ -1,5 +1,6 @@
 package com.philencripted.fairmoneytest.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
 
+        // get views
         addressTv = findViewById(R.id.user_address_detail);
         nameTv = findViewById(R.id.users_fullname);
         emailTv = findViewById(R.id.user_email_detail);
@@ -26,14 +28,23 @@ public class UserDetailsActivity extends AppCompatActivity {
         websiteTv = findViewById(R.id.user_website_detail);
         companyTv = findViewById(R.id.user_company_detail);
 
+        // setup UI
+        setupUIWithData();
 
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    private void setupUIWithData(){
+        // get data from intent for display
         Bundle intentBundle = getIntent().getExtras();
 
-
+        // get company and address from intent as object with the help of serializable
         Company company = (Company) intentBundle.getSerializable("company");
         Address address = (Address) intentBundle.getSerializable("address");
 
 
+        // retrieve other values from intent
         name = intentBundle.getString("name");
         email = intentBundle.getString("email");
         phone = intentBundle.getString("phone");
@@ -41,25 +52,28 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         try {
 
+            // display views
             nameTv.setText(name);
             emailTv.setText(email);
             phoneTv.setText(phone);
             websiteTv.setText(website);
+
+            assert company != null;
             companyTv.setText(company.getName());
+
+            assert address != null;
             addressTv.setText(address.getStreet()
-                    + "\n" +  address.getSuite()
-                    + "\n" +  address.getCity()
-                    + "\n" +  address.getZipcode());
+                    + getString(R.string.linebreak) +  address.getSuite()
+                    + getString(R.string.linebreak)+  address.getCity()
+                    + getString(R.string.linebreak) +  address.getZipcode());
 
             //debug
             System.out.println(company.getName());
-            System.out.println(address.getStreet());
-            System.out.println(name);
+
 
 
         }catch (NullPointerException e){
             e.printStackTrace();
         }
-
     }
 }

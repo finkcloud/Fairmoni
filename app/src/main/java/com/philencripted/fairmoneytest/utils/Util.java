@@ -17,6 +17,7 @@ public class Util {
     }
 
 
+    // check if network is available
     public static boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) Util.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     // declare view model
     private UserViewModel userViewModel;
 
-    private ProgressBar progressBar;
+     ProgressBar progressBar;
     private RecyclerView userRecyclerview;
     private UserAdapter userAdapter;
 
